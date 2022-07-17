@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "261647051295",
+    "project_id": "booklist-eca1a",
+    "storage_bucket": "booklist-eca1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261647051295:android:65ceab41fcd9e83d81032a",
+        "android_client_info": {
+          "package_name": "com.example.book_list"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261647051295-m9ipdm2l5fems6s0j7q2g7d23643j5at.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqx106KIFXuliebizoDOKiGsmjbZoM928"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261647051295-m9ipdm2l5fems6s0j7q2g7d23643j5at.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
