@@ -9,7 +9,7 @@ class AddBookPage extends StatelessWidget {
       create: (_) => AddBookModel(),
       child: Scaffold(
           appBar: AppBar(
-            title: Text('本一覧'),
+            title: Text('TODO ADD'),
           ),
           body: Center(
             child: Consumer<AddBookModel>(builder: (context, model, child) {
@@ -18,7 +18,7 @@ class AddBookPage extends StatelessWidget {
                   child: Column(
                     children: [
                       TextField(
-                        decoration: InputDecoration(hintText: '本のタイトル'),
+                        decoration: InputDecoration(hintText: 'todo title'),
                         onChanged: (text) {
                           model.title = text;
                         },
@@ -27,7 +27,7 @@ class AddBookPage extends StatelessWidget {
                         height: 8,
                       ),
                       TextField(
-                        decoration: InputDecoration(hintText: '本の著者'),
+                        decoration: InputDecoration(hintText: 'todo desc'),
                         onChanged: (text) {
                           model.author = text;
                         },
@@ -41,7 +41,7 @@ class AddBookPage extends StatelessWidget {
                             await model.addBook();
                             final snackBar = SnackBar(
                               backgroundColor: Colors.green,
-                              content: Text('本を追加しました'),
+                              content: Text('ADD TODO'),
                             );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
@@ -55,7 +55,7 @@ class AddBookPage extends StatelessWidget {
                                 .showSnackBar(snackBar);
                           }
                         },
-                        child: Text('追加する'),
+                        child: Text('ADD'),
                       )
                     ],
                   ));
