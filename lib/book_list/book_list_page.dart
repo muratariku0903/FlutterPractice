@@ -13,20 +13,20 @@ class BookListPage extends StatelessWidget {
       create: (_) => BookListModel()..fetchBookList(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('TODO'),
+          title: const Text('TODO'),
         ),
         body: Center(
           child: Consumer<BookListModel>(builder: (context, model, child) {
             final List<Book>? books = model.books;
 
             if (books == null) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
 
             final List<Widget> widgets = books
                 .map((book) => Slidable(
                       endActionPane: ActionPane(
-                        motion: DrawerMotion(),
+                        motion: const DrawerMotion(),
                         children: [
                           SlidableAction(
                             onPressed: (value) async {
@@ -48,13 +48,15 @@ class BookListPage extends StatelessWidget {
 
                               model.fetchBookList();
                             },
-                            backgroundColor: Color(0xFF7BC043),
+                            backgroundColor: const Color(0xFF7BC043),
                             foregroundColor: Colors.black45,
                             icon: Icons.edit,
                             label: '編集',
                           ),
                           SlidableAction(
-                            onPressed: (value) => {},
+                            onPressed: (value) async {
+                              await showConfirmDialog(context, book, model);
+                            },
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.black45,
                             icon: Icons.delete,
@@ -85,9 +87,44 @@ class BookListPage extends StatelessWidget {
             );
           },
           tooltip: 'Increment',
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       ),
+    );
+  }
+
+  Future showConfirmDialog(
+      BuildContext context, Book book, BookListModel model) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Delete this book?'),
+          content: Text('title is : ${book.title}'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () async {
+                await model.delete(book);
+                Navigator.pop(context);
+
+                const snackBar = SnackBar(
+                  content: Text('Success delete book'),
+                  backgroundColor: Colors.red,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                model.fetchBookList();
+              },
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

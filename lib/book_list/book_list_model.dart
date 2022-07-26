@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:book_list/domain/book.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+
 
 class BookListModel extends ChangeNotifier {
   List<Book>? books;
@@ -14,6 +15,7 @@ class BookListModel extends ChangeNotifier {
       final String id = document.id;
       final String title = data['title'];
       final String author = data['author'];
+
       return Book(id, title, author);
     }).toList();
 
