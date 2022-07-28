@@ -3,13 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:book_list/add_book/add_book_model.dart';
 
 class AddBookPage extends StatelessWidget {
+  const AddBookPage(Key? key):super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AddBookModel>(
       create: (_) => AddBookModel(),
       child: Scaffold(
           appBar: AppBar(
-            title: Text('TODO ADD'),
+            title: const Text('TODO ADD'),
           ),
           body: Center(
             child: Consumer<AddBookModel>(builder: (context, model, child) {
@@ -17,29 +19,45 @@ class AddBookPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
+                      GestureDetector(
+                        child: SizedBox(
+                          width: 100,
+                          height: 160,
+                          child: model.imageFile != null
+                              ? Image.file(model.imageFile!)
+                              : Container(
+                                  color: Colors.grey,
+                                ),
+                        ),
+                        onTap: () async {
+                          await model.pickImage();
+                        },
+                      ),
                       TextField(
-                        decoration: InputDecoration(hintText: 'todo title'),
+                        decoration:
+                            const InputDecoration(hintText: 'todo title'),
                         onChanged: (text) {
                           model.title = text;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       TextField(
-                        decoration: InputDecoration(hintText: 'todo desc'),
+                        decoration:
+                            const InputDecoration(hintText: 'todo desc'),
                         onChanged: (text) {
                           model.author = text;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       ElevatedButton(
                         onPressed: () async {
                           try {
                             await model.addBook();
-                            final snackBar = SnackBar(
+                            const snackBar = SnackBar(
                               backgroundColor: Colors.green,
                               content: Text('ADD TODO'),
                             );
@@ -55,7 +73,7 @@ class AddBookPage extends StatelessWidget {
                                 .showSnackBar(snackBar);
                           }
                         },
-                        child: Text('ADD'),
+                        child: const Text('ADD'),
                       )
                     ],
                   ));

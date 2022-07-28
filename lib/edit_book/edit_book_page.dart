@@ -5,8 +5,7 @@ import 'package:provider/provider.dart';
 
 class EditBookPage extends StatelessWidget {
   final Book book;
-
-  EditBookPage(this.book);
+  const EditBookPage(this.book, Key? key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class EditBookPage extends StatelessWidget {
       create: (_) => EditBookModel(book),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('TODO UPDATE'),
+          title: const Text('TODO UPDATE'),
         ),
         body: Center(
           child: Consumer<EditBookModel>(builder: (context, model, child) {
@@ -24,26 +23,26 @@ class EditBookPage extends StatelessWidget {
                 children: [
                   TextField(
                     controller: model.titleController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'todo',
                     ),
                     onChanged: (text) {
                       model.setTitle(text);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   TextField(
                     controller: model.authorController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'todo desc',
                     ),
                     onChanged: (text) {
                       model.setAuthor(text);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   ElevatedButton(
@@ -62,7 +61,7 @@ class EditBookPage extends StatelessWidget {
                             }
                           }
                         : null,
-                    child: Text('UPDATE'),
+                    child: const Text('UPDATE'),
                   ),
                 ],
               ),
