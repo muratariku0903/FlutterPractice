@@ -1,11 +1,13 @@
-import 'package:book_list/book_list/book_list_model.dart';
 import 'package:flutter/material.dart';
-import 'package:book_list/add_book/add_book_page.dart';
 import 'package:provider/provider.dart';
-import 'package:book_list/domain/book.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:book_list/domain/book.dart';
+import 'package:book_list/book_list/book_list_model.dart';
+import 'package:book_list/add_book/add_book_page.dart';
 import 'package:book_list/edit_book/edit_book_page.dart';
 import 'package:book_list/login/login_page.dart';
+import 'package:book_list/user/user_page.dart';
 
 class BookListPage extends StatelessWidget {
   const BookListPage(Key? key) : super(key: key);
@@ -20,13 +22,23 @@ class BookListPage extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(null),
-                    fullscreenDialog: true,
-                  ),
-                );
+                if (FirebaseAuth.instance.currentUser != null) {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const UserPage(null),
+                      fullscreenDialog: true,
+                    ),
+                  );
+                } else {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(null),
+                      fullscreenDialog: true,
+                    ),
+                  );
+                }
               },
               icon: const Icon(Icons.person),
             )
